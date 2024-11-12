@@ -18,7 +18,7 @@ tf.random.set_seed(42)
 
 load_dotenv("cred.env")
 secure_password = os.getenv("PASSWORD")
-stored_hash = bcrypt.hashpw(secure_password.encode('utf-8'), bcrypt.gensalt())
+stored_hash = bcrypt.hashpw("UNKNOWN404".encode('utf-8'), bcrypt.gensalt())
 
 # Function to handle authentication with password hashing
 def authenticate():
