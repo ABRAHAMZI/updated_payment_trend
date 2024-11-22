@@ -28,6 +28,7 @@ def authenticate():
             return False
 
 # LSTM Model and Visualization
+# After scaling the data, you can inverse transform only the relevant columns:
 def run_lstm_model():
     df = pd.read_csv('synthetic_bank_transactions.csv')
     df['date'] = pd.to_datetime(df['date'])
@@ -99,7 +100,8 @@ def run_lstm_model():
     st.pyplot(plt)
 
     # Visualization 2: Combined Past and Future Transactions
-    past_transactions_rescaled = scaler.inverse_transform(data)[:, 0]
+    # Inverse transform only the scaled columns (transaction_amount, balance)
+    past_transactions_rescaled = scaler.inverse_transform(df[['transaction_amount', 'balance']].values)[:, 0]
     combined_transactions = np.concatenate((past_transactions_rescaled[-window_size:], y_values))
 
     plt.figure(figsize=(10, 5))
